@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+        <record id="action_report_project_iht" model="ir.actions.report">
+            <field name="name">Cetak Detail Project</field>
+            <field name="model">project.project</field> 
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">project_iht.template_laporan_project</field>
+            <field name="report_file">project_iht.template_laporan_project</field>
+            <field name="binding_model_id" ref="project.model_project_project"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="template_laporan_project">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h2 class="text-center">Laporan Detail Project</h2>
+                            <br/>
+                            
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td style="width: 30%; font-weight: bold; background-color: #f0f0f0;">Nama Project</td>
+                                    <td><span t-field="o.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; background-color: #f0f0f0;">Customer</td>
+                                    <td><span t-field="o.partner_id"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; background-color: #f0f0f0;">Manager</td>
+                                    <td><span t-field="o.user_id"/></td>
+                                </tr>
+                            </table>
+
+                            <br/>
+                            <h4>Informasi Tambahan (Custom)</h4>
+                            <hr/>
+                            
+                            <table class="table table-striped">
+                                <tr>
+                                    <td style="width: 30%;"><strong>Lokasi Proyek</strong></td>
+                                    <td><span t-field="o.lokasi_proyek"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Source Aplikasi</strong></td>
+                                    <td><span t-field="o.source_aplikasi_pendukung"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Pekerja Remote</strong></td>
+                                    <td><span t-field="o.daftar_pekerja_remote"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
